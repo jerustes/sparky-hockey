@@ -23,7 +23,7 @@ public class BasketballPoints {
 		SparkConf conf = new SparkConf().setMaster("local[1]").setAppName("basketballPoints"); // single thread
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		// Load input data.
-		JavaRDD<String> input = sc.textFile("input.txt");
+		JavaRDD<String> input = sc.textFile("ballinput.txt");
 		// Split up into lines (/n).
 		JavaRDD<Player> lines = input.flatMap(new FlatMapFunction<String, Player>() {
 
