@@ -5,7 +5,7 @@ public class Player {
 
 	public String Name;
 	public int points;
-  public int rebounds
+  public int rebounds;
 	public int assists;
   public int steals;
   public int blocks;

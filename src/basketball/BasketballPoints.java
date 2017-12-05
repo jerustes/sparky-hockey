@@ -36,25 +36,25 @@ public class BasketballPoints {
 			public Iterator<Player> call(String arg0) throws Exception {
 				String[] items = arg0.split(", ");
 				Player bballer = new Player();
-				player.Name = items[0];
+				bballer.Name = items[0];
 				String[] positiveValues = items[1].split(" ");
 				int points = Integer.parseInt(positiveValues[0]);
 				int rebounds = Integer.parseInt(positiveValues[1]);
-        int assists = Integer.parseInt(positiveValues[2]);
+				int assists = Integer.parseInt(positiveValues[2]);
 				int steals = Integer.parseInt(positiveValues[3]);
-        int blocks = Integer.parseInt(positiveValues[4]);
+				int blocks = Integer.parseInt(positiveValues[4]);
 				bballer.points = points;
-        bballer.rebounds = points;
+				bballer.rebounds = points;
 				bballer.assists = assists;
-        bballer.steals = steals;
-        bballer.blocks = blocks;
-        String[] negativeValues = items[2].split(" ");
-        int missedFG = Integer.parseInt(negativeValues[0]);
+				bballer.steals = steals;
+				bballer.blocks = blocks;
+				String[] negativeValues = items[2].split(" ");
+				int missedFG = Integer.parseInt(negativeValues[0]);
 				int missedFT = Integer.parseInt(negativeValues[1]);
-        int turnovers = Integer.parseInt(negativeValues[2]);
+				int turnovers = Integer.parseInt(negativeValues[2]);
 				int fouls = Integer.parseInt(negativeValues[3]);
-        int ejections = Integer.parseInt(negativeValues[4]);
-				Player[] res = { player };
+				int ejections = Integer.parseInt(negativeValues[4]);
+				Player[] res = { bballer };
 				return Arrays.asList(res).iterator();
 			}
 		});
