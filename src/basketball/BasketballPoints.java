@@ -68,7 +68,7 @@ public class BasketballPoints {
                 (b.missedFG + b.missedFT + b.turnovers + b.fouls + b.ejections));
 		 
 		  } 
-      });
+      		});
 
 		 
 		 JavaPairRDD<String, Integer> result = players.reduceByKey(new Function2<Integer, Integer, Integer>() {
