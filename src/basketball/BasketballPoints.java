@@ -42,7 +42,9 @@ public class BasketballPoints {
 				BPlayer bballer = new BPlayer();
 				bballer.Name = items[0];
 				String[] positiveValues = items[1].split(" ");
-				//Game stats:
+				/*Divide strings in three blocks: name | positive values | negative values */
+				
+				//Game stats (+):
 				int points = Integer.parseInt(positiveValues[0]);
 				int rebounds = Integer.parseInt(positiveValues[1]);
 				int assists = Integer.parseInt(positiveValues[2]);
@@ -50,17 +52,25 @@ public class BasketballPoints {
 				int blocks = Integer.parseInt(positiveValues[4]);
 				//player attr initialize
 				bballer.points = points;
-				bballer.rebounds = points;
+				bballer.rebounds = rebounds;
 				bballer.assists = assists;
 				bballer.steals = steals;
 				bballer.blocks = blocks;
-				// ?????
+				
+				//Game stats (-)
 				String[] negativeValues = items[2].split(" ");
 				int missedFG = Integer.parseInt(negativeValues[0]);
 				int missedFT = Integer.parseInt(negativeValues[1]);
 				int turnovers = Integer.parseInt(negativeValues[2]);
 				int fouls = Integer.parseInt(negativeValues[3]);
 				int ejections = Integer.parseInt(negativeValues[4]);
+				//player attr initialize
+				bballer.missedFG = missedFG;
+				bballer.missedFT = missedFT;
+				bballer.turnovers = turnovers;
+				bballer.fouls = fouls;
+				bballer.ejections = ejections;
+				
 				BPlayer[] res = { bballer };
 				return Arrays.asList(res).iterator();
 			}
@@ -82,9 +92,12 @@ public class BasketballPoints {
 
 			@Override
 			public Tuple2<String, Integer> call(BPlayer bp) throws Exception {
-
-				return new Tuple2<String, Integer>(bp.Name, ((bp.points + bp.rebounds + bp.assists + bp.steals + bp.blocks) - 
-						(bp.missedFG + bp.missedFT + bp.turnovers + bp.fouls + bp.ejections)) );
+				
+				int positive = bp.points + bp.rebounds + bp.assists + bp.steals + bp.blocks;
+				int negative = bp.missedFG + bp.missedFT + bp.turnovers + bp.fouls + bp.ejections;
+				System.out.println(bp.Name + "  " + positive + "(" + bp.points + bp.rebounds + bp.assists + bp.steals + 
+						bp.blocks + ")" + "  " + negative);
+				return new Tuple2<String, Integer>(bp.Name, (positive - negative) );
 			} 
       	});
 		
@@ -103,6 +116,7 @@ public class BasketballPoints {
 			@Override
 			public Iterator<String> call(Tuple2<String, Integer> player) throws Exception {
 				return Arrays.asList(new String[] { player._1 + "::" + player._2() }).iterator(); //WTF ._2() ???????
+											/* 			nombre				tota values */
 			}
 		});
 
