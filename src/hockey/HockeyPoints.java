@@ -61,12 +61,12 @@ public class HockeyPoints {
 
 		
 		 JavaPairRDD<String, Integer> res = players.mapToPair(new PairFunction<Player,
-		 String, Integer>() {
+				 String, Integer>() {
 		 
-		 @Override public Tuple2<String, Integer> call(Player arg0) throws Exception {
-		 return new Tuple2<String, Integer>(arg0.Name, arg0.goals + arg0.assists);
-		 
-		 } });
+			 @Override public Tuple2<String, Integer> call(Player arg0) throws Exception {
+				 return new Tuple2<String, Integer>(arg0.Name, arg0.goals + arg0.assists);
+			 } 
+		 });
 
 		 
 		 JavaPairRDD<String, Integer> res2 = res.reduceByKey(new Function2<Integer, Integer, Integer>() {
