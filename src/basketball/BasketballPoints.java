@@ -38,13 +38,14 @@ public class BasketballPoints {
 
 			@Override
 			public Iterator<BPlayer> call(String arg0) throws Exception {
+				/*Divide strings in three blocks: name | positive values | negative values */
 				String[] items = arg0.split(", ");
 				BPlayer bballer = new BPlayer();
+				//Name of player
 				bballer.Name = items[0];
-				String[] positiveValues = items[1].split(" ");
-				/*Divide strings in three blocks: name | positive values | negative values */
 				
 				//Game stats (+):
+				String[] positiveValues = items[1].split(" ");
 				int points = Integer.parseInt(positiveValues[0]);
 				int rebounds = Integer.parseInt(positiveValues[1]);
 				int assists = Integer.parseInt(positiveValues[2]);
@@ -57,7 +58,7 @@ public class BasketballPoints {
 				bballer.steals = steals;
 				bballer.blocks = blocks;
 				
-				//Game stats (-)
+				//Game stats (-):
 				String[] negativeValues = items[2].split(" ");
 				int missedFG = Integer.parseInt(negativeValues[0]);
 				int missedFT = Integer.parseInt(negativeValues[1]);
@@ -92,11 +93,12 @@ public class BasketballPoints {
 
 			@Override
 			public Tuple2<String, Integer> call(BPlayer bp) throws Exception {
-				
+				// positive stats: points + rebounds + assists + steals + blocks
 				int positive = bp.points + bp.rebounds + bp.assists + bp.steals + bp.blocks;
+				// negative stats: missedFG + missedFT + turnovers + fouls + ejections
 				int negative = bp.missedFG + bp.missedFT + bp.turnovers + bp.fouls + bp.ejections;
-				System.out.println(bp.Name + "  " + positive + "(" + bp.points + bp.rebounds + bp.assists + bp.steals + 
-						bp.blocks + ")" + "  " + negative);
+				/* System.out.println(bp.Name + "  " + positive + "(" + bp.points + bp.rebounds + 
+					bp.assists + bp.steals + bp.blocks + ")" + "  " + negative); */
 				return new Tuple2<String, Integer>(bp.Name, (positive - negative) );
 			} 
       	});
@@ -115,8 +117,9 @@ public class BasketballPoints {
 
 			@Override
 			public Iterator<String> call(Tuple2<String, Integer> player) throws Exception {
-				return Arrays.asList(new String[] { player._1 + "::" + player._2() }).iterator(); //WTF ._2() ???????
-											/* 			nombre				tota values */
+				/* Show a list of players with their respective points. */
+				return Arrays.asList(new String[] { player._1 + ": " + player._2() }).iterator();
+															
 			}
 		});
 
